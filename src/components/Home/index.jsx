@@ -22,12 +22,15 @@ export const Home = () => {
                             <p key={id} className={classes.postCategory}>
                               {category}
                             </p>
-                          )
+                          );
                         })}
                       </div>
                     </div>
                     <p className={classes.postTitle}>{post.title}</p>
-                    <p className={classes.postBody}>{post.content}</p>
+                    <div
+                      className={classes.postBody}
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
                     <div />
                   </div>
                 </div>
