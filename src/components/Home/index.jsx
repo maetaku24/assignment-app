@@ -1,9 +1,27 @@
-import React from "react";
-import { posts } from "../../data/posts";
+import React, { useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetcher = async () => {
+      setLoading(true);
+      const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts");
+      const data = await res.json();
+      setPosts(data.posts);
+      setLoading(false);
+    }
+
+    fetcher()
+  }, [])
+
+  if (loading) return <div className={classes.postloading}>読み込み中...</div>
+
+
   return (
     <div>
       <ul className={classes.container}>

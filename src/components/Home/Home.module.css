@@ -76,3 +76,10 @@
   font-size: 1rem;
   line-height: 1.5;
 }
+
+.postloading {
+  margin: 2rem auto;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
