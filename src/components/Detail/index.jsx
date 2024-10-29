@@ -5,18 +5,22 @@ import classes from "./Detail.module.css";
 export const Detail = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetcher = async() => {
+      setLoading(true);
       const res = await fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`);
       const { post } = await res.json();
       setPost(post)
+      setLoading(false);
     }
 
     fetcher();
   }, []);
 
-  if (!post) return <div className={classes.postError}>記事が見つかりませんでした。</div>
+  if (loading) return <div className={classes.postloading}>読み込み中...</div>
+  if (!loading && !post) return <div className={classes.postError}>記事が見つかりませんでした。</div>
 
   return (
     <div className={classes.container}>
