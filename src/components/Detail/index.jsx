@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { posts } from "../../data/posts";
 import classes from "./Detail.module.css";
 
 export const Detail = () => {
   const { id } = useParams();
-  const post = posts.find((post) => post.id === Number(id));
+  const [post, setPost] = useState(null);
 
-  if (!post) return <div className={classes.postError}>記事が見つかりませんでした。</div>;
+  useEffect(() => {
+    const fetcher = async() => {
+      const res = await fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`);
+      const { post } = await res.json();
+      setPost(post)
+    }
+
+    fetcher();
+  }, []);
+
+  if (!post) return <div className={classes.postError}>記事が見つかりませんでした。</div>
 
   return (
     <div className={classes.container}>
