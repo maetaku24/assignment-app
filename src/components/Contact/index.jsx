@@ -84,11 +84,12 @@ export const Contact = () => {
             本文
           </label>
           <div className="w-full">
-            <input
+            <textarea
               id="message"
               name="message"
               type="text"
-              className="w-full border border-gray-300 rounded-lg p-40"
+              rows="8"
+              className="w-full border border-gray-300 rounded-lg p-10"
               {...register("message", {
                 required: "本文は必須です。",
                 maxLength: {
