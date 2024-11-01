@@ -17,7 +17,7 @@ export const Detail = () => {
     }
 
     fetcher();
-  }, []);
+  }, [id]);
 
   if (loading) return <div className={classes.postloading}>読み込み中...</div>
   if (!loading && !post) return <div className={classes.postError}>記事が見つかりませんでした。</div>
@@ -26,7 +26,7 @@ export const Detail = () => {
     <div className={classes.container}>
       <div className={classes.post}>
         <div className={classes.postImage}>
-          <img src={post.thumbnailUrl} />
+          <img src={post.thumbnailUrl} alt="" />
         </div>
         <div className={post.postContent}>
           <div className={classes.postInfo}>
